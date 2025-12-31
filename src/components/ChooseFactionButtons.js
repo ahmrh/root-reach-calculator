@@ -120,19 +120,6 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
     const setAvailableFactions = (previousFactions) => {
         const factions = {...previousFactions};
 
-        
-        console.log("=== recalculating factions ===");
-
-        Object.values(factions).forEach(f => {
-            console.log(
-            "before:",
-            f.name,
-            f.status,
-            "reach:",
-            f.reach
-            );
-        });
-
         const pickedFactions = Object.values(factions).filter((faction) => faction.status === IS_PICKED)
 
         // If the number of picked factions >= number of players in game then set every not picked and not banned faction as disabled
@@ -177,6 +164,35 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
                 continue
             }
 
+            
+            // new rules regarding knaves
+            const isVagabondPicked =
+                factions.vagabond1.status === IS_PICKED ||
+                factions.vagabond2.status === IS_PICKED;
+                
+            const isKnavesPicked =
+                factions.knaves.status === IS_PICKED;
+
+            /* --- Rule 2: If any Vagabond is picked, Knaves is unavailable --- */
+            if (
+                factions[factionsKey].name === "knaves" &&
+                isVagabondPicked
+            ) {
+                factions[factionsKey].status = IS_NOT_AVAILABLE;
+                continue;
+            }
+
+            /* --- Rule 3: If Knaves is picked, no Vagabonds are available --- */
+            if (
+                (factions[factionsKey].name === "vagabond1" ||
+                factions[factionsKey].name === "vagabond2") &&
+                isKnavesPicked
+            ) {
+                factions[factionsKey].status = IS_NOT_AVAILABLE;
+                continue;
+            }
+            //
+
             let sortedFactionArrayWithoutFaction = sortedFactionArray.filter((faction) => faction.name !== factionsKey)
             let maxReachForFaction = factions[factionsKey].reach;
             for (let i = 0; i < playersStillToPick - 1; i++) {
@@ -191,14 +207,6 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
                 factions[factionsKey].status = IS_AVAILABLE
             }
         }
-
-        Object.values(factions).forEach(f => {
-            console.log(
-            "after:",
-            f.name,
-            f.status
-            );
-        });
 
         return factions;
     }
@@ -235,7 +243,7 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
     }, [setReach, factions])
 
     return (
-        <Grid container columns={{xs: 4}} rowSpacing={6} justifyContent={'center'}>
+        <Grid container columns={{xs: 3}} rowSpacing={6} justifyContent={'center'}>
             {Object.values(factions).map((faction, index) => (
                 <Grid
                     item
