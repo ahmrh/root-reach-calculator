@@ -119,6 +119,20 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
 
     const setAvailableFactions = (previousFactions) => {
         const factions = {...previousFactions};
+
+        
+        console.log("=== recalculating factions ===");
+
+        Object.values(factions).forEach(f => {
+            console.log(
+            "before:",
+            f.name,
+            f.status,
+            "reach:",
+            f.reach
+            );
+        });
+
         const pickedFactions = Object.values(factions).filter((faction) => faction.status === IS_PICKED)
 
         // If the number of picked factions >= number of players in game then set every not picked and not banned faction as disabled
@@ -177,6 +191,14 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
                 factions[factionsKey].status = IS_AVAILABLE
             }
         }
+
+        Object.values(factions).forEach(f => {
+            console.log(
+            "after:",
+            f.name,
+            f.status
+            );
+        });
 
         return factions;
     }
