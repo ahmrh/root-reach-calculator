@@ -15,7 +15,6 @@ import diasporaImage from "../faction-images/diaspora.png";
 import twilightImage from "../faction-images/twilight.png";
 import knavesImage from "../faction-images/knaves.png";
 
-
 import * as React from 'react';
 import {IS_AVAILABLE, IS_BANNED, IS_NOT_AVAILABLE, IS_PICKED} from "../constants";
 import {ChooseFactionButton} from "./ChooseFactionButton";
@@ -89,7 +88,6 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
             status: IS_AVAILABLE
         },
         
-        // adding new factions
         diaspora: {
             name: "diaspora",
             image: diasporaImage,
@@ -109,7 +107,7 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
             image: knavesImage,
             reach: 4,
             status: IS_AVAILABLE
-        },
+        }
 
     });
 
