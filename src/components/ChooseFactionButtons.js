@@ -10,6 +10,12 @@ import vagabondImage from "../faction-images/vagabond.png";
 import vagabond2Image from "../faction-images/vagabond2.png";
 import hundredsImage from "../faction-images/hundreds.png";
 import keepersImage from "../faction-images/keepers.png";
+
+import diasporaImage from "../faction-images/diaspora.png";
+import twilightImage from "../faction-images/twilight.png";
+import knavesImage from "../faction-images/knaves.png";
+
+
 import * as React from 'react';
 import {IS_AVAILABLE, IS_BANNED, IS_NOT_AVAILABLE, IS_PICKED} from "../constants";
 import {ChooseFactionButton} from "./ChooseFactionButton";
@@ -81,7 +87,30 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
             image: keepersImage,
             reach: 8,
             status: IS_AVAILABLE
-        }
+        },
+        
+        // adding new factions
+        diaspora: {
+            name: "diaspora",
+            image: diasporaImage,
+            reach: 7,
+            status: IS_AVAILABLE
+        },
+        
+        twilight: {
+            name: "twilight",
+            image: twilightImage,
+            reach: 4,
+            status: IS_AVAILABLE
+        },
+        
+        knaves: {
+            name: "knaves",
+            image: knavesImage,
+            reach: 4,
+            status: IS_AVAILABLE
+        },
+
     });
 
     React.useEffect(() => {
