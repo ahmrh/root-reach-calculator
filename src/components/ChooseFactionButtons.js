@@ -88,7 +88,6 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
             status: IS_AVAILABLE
         },
         
-        // adding new factions
         diaspora: {
             name: "diaspora",
             image: diasporaImage,
@@ -108,7 +107,7 @@ export const ChooseFactionButtons = ({playerCount, setReach, requiredReach}) => 
             image: knavesImage,
             reach: 4,
             status: IS_AVAILABLE
-        },
+        }
 
     });
 
